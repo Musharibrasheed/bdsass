@@ -82,5 +82,10 @@ class Films extends Model
     {
         return $this->belongsTo(Countries::class,'country','id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class,'films_id','id');
+    }
     
 }

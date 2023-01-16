@@ -19,7 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', function () {
+    return Redirect::route('films.index');
+});
 
 
 Route::resource('products', App\Http\Controllers\productController::class);
@@ -38,3 +41,6 @@ Route::get('/logout', function () {
     Auth::logout();
     return Redirect::route('films.index');
 });
+
+
+Route::resource('comments', App\Http\Controllers\CommentsController::class)->middleware('auth');

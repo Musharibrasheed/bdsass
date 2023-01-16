@@ -36,19 +36,20 @@ class FilmsController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $film = '';
-        $skip = ($request->skip > 0) ? $request->skip : 0;
-        $limit = 1;
-        $response = Http::get("http://localhost/bdsass/public/api/films?skip={$skip}&limit={$limit}");
-        // echo $response->getStatusCode(); // 200
-        $film =  json_decode($response->getBody(),true); 
+        $film       = '';
+        $skip       = ($request->skip > 0) ? $request->skip : 0;
+        $limit      = 1;
+        $response   = Http::get("http://localhost/bdsass/public/api/films?skip={$skip}&limit={$limit}");
+        $film       =  json_decode($response->getBody(),true); 
         if( !empty($film['data']) ) {
-            $film =  (object) $film['data'][0]; 
-            $film->prev = $skip;
-            $film->next = $skip+1;
-            $film->limit = $limit;
+            $film           =  (object) $film['data'][0]; 
+            $film->prev     = $skip;
+            $film->next     = $skip+1;
+            $film->limit    = $limit;
+            $film->comments       = $this->filmsRepository->find($film->id);
         } 
         
+
 
         return view('films.index')
             ->with('film', $film);

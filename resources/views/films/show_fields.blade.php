@@ -19,7 +19,7 @@
 <!-- Release Date Field -->
 <div class="col-sm-12">
     {!! Form::label('release_date', 'Release Date:') !!}
-    <p>{{ $films->release_date }}</p>
+    <p>{{ !empty($films->release_date) ? date('d M, y', strtotime($films->release_date)) : '' }}</p>
 </div>
 
 <!-- Rating Field -->

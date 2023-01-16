@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Create Films</h1>
+                    <h1>Edit Comments</h1>
                 </div>
             </div>
         </div>
@@ -17,19 +17,17 @@
 
         <div class="card">
 
-            {!! Form::open(['url' => env('APP_URL').'/api/films', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::model($comments, ['route' => ['comments.update', $comments->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
-
                 <div class="row">
-                    @include('films.fields')
+                    @include('comments.fields')
                 </div>
-
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('films.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('comments.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}
