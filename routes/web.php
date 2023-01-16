@@ -14,9 +14,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Redirect::route('films.index');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::resource('products', App\Http\Controllers\productController::class);
+
+
+Route::resource('genres', App\Http\Controllers\GenresController::class);
+
+
+Route::resource('films', App\Http\Controllers\FilmsController::class);
+
+
+Route::get('/film/{slug}', [App\Http\Controllers\FilmsController::class, 'showDetails'])->name('show_details');
+
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return Redirect::route('films.index');
+});
