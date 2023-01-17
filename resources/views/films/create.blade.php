@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::open(['url' => env('APP_URL').'/api/films', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['url' => env('FILM_ADD'), 'enctype' => 'multipart/form-data']) !!}
 
             <div class="card-body">
 

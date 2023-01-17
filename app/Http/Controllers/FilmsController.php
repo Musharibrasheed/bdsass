@@ -39,7 +39,7 @@ class FilmsController extends AppBaseController
         $film       = '';
         $skip       = ($request->skip > 0) ? $request->skip : 0;
         $limit      = 1;
-        $response   = Http::get("http://localhost/bdsass/public/api/films?skip={$skip}&limit={$limit}");
+        $response   = Http::get(env('FILM_LIST')."?skip={$skip}&limit={$limit}");
         $film       =  json_decode($response->getBody(),true); 
         if( !empty($film['data']) ) {
             $film           =  (object) $film['data'][0]; 
@@ -62,8 +62,8 @@ class FilmsController extends AppBaseController
      */
     public function create()
     {
-        $countries = getCountries();
-        $genres = $this->genresRepository->all()->pluck('genre','id')->toArray();
+        $countries  = getCountries();
+        $genres     = $this->genresRepository->all()->pluck('genre','id')->toArray();
         return view('films.create')->with('genres', $genres,)->with('countries', $countries);
     }
 
@@ -76,9 +76,9 @@ class FilmsController extends AppBaseController
      */
     public function store(CreateFilmsRequest $request)
     {
-        $input = $request->all();
+        $input  = $request->all();
 
-        $films = $this->filmsRepository->create($input);
+        $films  = $this->filmsRepository->create($input);
 
         Flash::success('Films saved successfully.');
 
