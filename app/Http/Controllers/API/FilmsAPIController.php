@@ -63,7 +63,7 @@ class FilmsAPIController extends AppBaseController
             if(!empty($input['photo'])) {
                 $films->photo   = upload_image($input['photo'], '/film/images/');
                 $films->slug    = $this->filmsRepository->createSlug($films->film, $films->id);
-                $res = $this->filmsRepository->update($films->toArray(), $films->id);
+                $res            = $this->filmsRepository->update($films->toArray(), $films->id);
             }
         }
         

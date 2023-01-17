@@ -46,10 +46,8 @@ class FilmsController extends AppBaseController
             $film->prev     = $skip;
             $film->next     = $skip+1;
             $film->limit    = $limit;
-            $film->comments       = $this->filmsRepository->find($film->id);
+            $film->comments = $this->filmsRepository->find($film->id);
         } 
-        
-
 
         return view('films.index')
             ->with('film', $film);

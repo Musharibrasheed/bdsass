@@ -46,8 +46,5 @@ class FilmsRepository extends BaseRepository
 
     public function getFilmByslug($slug='') {
         return $this->model()::where('slug',$slug)->first();
-        // echo $this->model()::where();
-        // dd($a->toArray());
-        // exit;
     }
 }
