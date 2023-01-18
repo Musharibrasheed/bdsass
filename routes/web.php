@@ -19,14 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', function () {
     return Redirect::route('films.index');
 });
-
-
-Route::resource('products', App\Http\Controllers\productController::class);
-
 
 Route::resource('genres', App\Http\Controllers\GenresController::class);
 
