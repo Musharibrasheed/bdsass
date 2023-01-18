@@ -76,9 +76,27 @@ class FilmsController extends AppBaseController
     {
         $input  = $request->all();
 
-        $films  = $this->filmsRepository->create($input);
+        if(!empty($input['photo'])) {
+            $input['photo']   = upload_image($input['photo'], '/film/images/');
+        }
 
-        Flash::success('Films saved successfully.');
+        $response = Http::post(env('FILM_ADD'), [
+            'film'          => $input['film'],
+            'description'   => $input['description'],
+            'release_date'  => $input['release_date'],
+            'rating'        => $input['rating'],
+            'ticket_price'  => $input['ticket_price'],
+            'country'       => $input['country'],
+            'photo'         => $input['photo'],
+            'genre'         => $input['genre']
+        ]);
+
+        $result     = json_decode($response->getBody(),true);
+
+        if( empty($result))
+            Flash::error($result['error']);
+
+        Flash::success($result['message']);
 
         return redirect(route('films.index'));
     }

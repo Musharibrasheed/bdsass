@@ -2,12 +2,11 @@
 
 ## APIs:
 
-Set base urls enclosed in braces '{http://localhost/bdsass/public}' according to enviroment.
-Put these APIs constants on .env file.
+Must put these APIs constants on .env file.
 
--   BUCKET_URL={http://localhost/bdsass/public}/film/images
--   FILM_LIST={http://localhost/bdsass/public}/api/films
--   FILM_ADD={http://localhost/bdsass/public}/api/films
+-   BUCKET_URL = http://127.0.0.1:8080/film/images
+-   FILM_LIST = http://127.0.0.1:8080/api/films
+-   FILM_ADD = http://127.0.0.1:8080/api/films
 
 ## User Credentials:
 
@@ -19,6 +18,10 @@ Put these APIs constants on .env file.
 -   pass : jack@gmail.com
 
 ## Note:
+
+Run this command on terminal to start to access APIs.
+
+-   php artisan serve --port=8080
 
 Run this command on terminal to use application.
 

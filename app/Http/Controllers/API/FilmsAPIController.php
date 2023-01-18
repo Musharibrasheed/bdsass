@@ -58,17 +58,9 @@ class FilmsAPIController extends AppBaseController
         $films = $this->filmsRepository->create($input);
         
         if( !empty($films) ) {
-            $films->genres()->sync($request['genre']);
-            
-            if(!empty($input['photo'])) {
-                $films->photo   = upload_image($input['photo'], '/film/images/');
-                $films->slug    = $this->filmsRepository->createSlug($films->film, $films->id);
-                $res            = $this->filmsRepository->update($films->toArray(), $films->id);
-            }
-        }
-        
-        if( !empty($input['_token'])) {
-            return redirect(route('films.index'))->with('success','addess');
+            $films->genres()->sync($input['genre']);
+            $films->slug    = $this->filmsRepository->createSlug($films->film, $films->id);
+            $res            = $this->filmsRepository->update($films->toArray(), $films->id);
         }
 
         return $this->sendResponse($films->toArray(), 'Films saved successfully');
